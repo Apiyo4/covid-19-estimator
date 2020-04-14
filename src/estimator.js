@@ -3,7 +3,7 @@ const getNumberOfDays = (days, dayType) => {
   if (dayType === 'days') {
     return Math.trunc(days / 3);
   } if (dayType === 'months') {
-    return Math.trunc((days) / 3) * 30;
+    return Math.trunc((days * 30) / 3);
   } if (dayType === 'weeks') {
     return Math.trunc((days / 3) * 7);
   }
