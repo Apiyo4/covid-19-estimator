@@ -23,15 +23,15 @@ const covid19ImpactEstimator = (data) => {
     * 2 ** getNumberOfDays(data.timeToElapse, data.periodType);
 
   // challenge 2
-  newObj.impact.severeCasesByRequestedTime = Math.trunc(
+  newObj.impact.severeCasesByRequestedTime = Math.floor(
     (15 / 100) * newObj.impact.infectionsByRequestedTime
   );
-  newObj.severeImpact.severeCasesByRequestedTime = Math.trunc(
+  newObj.severeImpact.severeCasesByRequestedTime = Math.floor(
     (15 / 100) * newObj.severeImpact.infectionsByRequestedTime
   );
-  newObj.impact.hospitalBedsByRequestedTime = Math.trunc(data.totalHospitalBeds * 0.35)
+  newObj.impact.hospitalBedsByRequestedTime = Math.floor(data.totalHospitalBeds * 0.35)
     - newObj.impact.severeCasesByRequestedTime;
-  newObj.severeImpact.hospitalBedsByRequestedTime = Math.trunc(data.totalHospitalBeds
+  newObj.severeImpact.hospitalBedsByRequestedTime = Math.floor(data.totalHospitalBeds
   * 0.35) - newObj.severeImpact.severeCasesByRequestedTime;
 
   // challenge 3
