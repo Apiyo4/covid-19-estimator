@@ -8,6 +8,16 @@ const getNumberOfDays = (days, dayType) => {
     return Math.trunc((days / 3) * 7);
   }
 };
+// eslint-disable-next-line consistent-return
+const getDays = (days, dayType) => {
+  if (dayType === 'days') {
+    return Math.trunc(days);
+  } if (dayType === 'months') {
+    return Math.trunc((days * 30));
+  } if (dayType === 'weeks') {
+    return Math.trunc((days) * 7);
+  }
+};
 const covid19ImpactEstimator = (data) => {
   const newObj = {
     data: {},
@@ -60,7 +70,7 @@ const covid19ImpactEstimator = (data) => {
     Math.floor(newObj.severeImpact.infectionsByRequestedTime
       * data.region.avgDailyIncomePopulation)
       * data.region.avgDailyIncomeInUSD
-      * data.timeToElapse
+      * getDays(data.timeToElapse, data.periodType)
   );
   return newObj;
 };
