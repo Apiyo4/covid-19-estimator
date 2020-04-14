@@ -1,4 +1,13 @@
-const getNumberOfDays = (days) => Math.trunc(days / 3);
+// eslint-disable-next-line consistent-return
+const getNumberOfDays = (days, dayType) => {
+  if (dayType === 'days') {
+    return Math.trunc(days / 3);
+  } if (dayType === 'months') {
+    return Math.trunc((days * 30) / 3);
+  } if (dayType === 'weeks') {
+    return Math.trunc((days * 7) / 3);
+  }
+};
 const covid19ImpactEstimator = (data) => {
   const newObj = {
     data: {},
@@ -9,9 +18,9 @@ const covid19ImpactEstimator = (data) => {
   newObj.impact.currentlyInfected = data.reportedCases * 10;
   newObj.severeImpact.currentlyInfected = data.reportedCases * 50;
   newObj.impact.infectionsByRequestedTime = newObj.impact.currentlyInfected
-  * 2 ** getNumberOfDays(data.timeToElapse);
+  * 2 ** getNumberOfDays(data.timeToElapse, data.periodType);
   newObj.severeImpact.infectionsByRequestedTime = newObj.severeImpact.currentlyInfected
-  * 2 ** getNumberOfDays(data.timeToElapse);
+    * 2 ** getNumberOfDays(data.timeToElapse, data.periodType);
 
   // challenge 2
   newObj.impact.severeCasesByRequestedTime = (15 / 100)
