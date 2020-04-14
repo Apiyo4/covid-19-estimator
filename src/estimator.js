@@ -23,22 +23,30 @@ const covid19ImpactEstimator = (data) => {
     * 2 ** getNumberOfDays(data.timeToElapse, data.periodType);
 
   // challenge 2
-  newObj.impact.severeCasesByRequestedTime = (15 / 100)
-  * newObj.impact.infectionsByRequestedTime;
-  newObj.severeImpact.severeCasesByRequestedTime = (15 / 100)
-  * newObj.severeImpact.infectionsByRequestedTime;
+  newObj.impact.severeCasesByRequestedTime = Math.trunc(
+    (15 / 100) * newObj.impact.infectionsByRequestedTime
+  );
+  newObj.severeImpact.severeCasesByRequestedTime = Math.trunc(
+    (15 / 100) * newObj.severeImpact.infectionsByRequestedTime
+  );
   newObj.impact.hospitalBedsByRequestedTime = Math.trunc(data.totalHospitalBeds * 0.35)
     - newObj.impact.severeCasesByRequestedTime;
   newObj.severeImpact.hospitalBedsByRequestedTime = Math.trunc(data.totalHospitalBeds
   * 0.35) - newObj.severeImpact.severeCasesByRequestedTime;
 
   // challenge 3
-  newObj.impact.casesForICUByRequestedTime = (newObj.impact.infectionsByRequestedTime * 5) / 100;
-  newObj.severeImpact.casesForICUByRequestedTime = 0.05
-  * newObj.severeImpact.infectionsByRequestedTime;
-  newObj.impact.casesForVentilatorsByRequestedTime = 0.02 * newObj.impact.infectionsByRequestedTime;
-  newObj.impact.casesForVentilatorsByRequestedTime = 0.02
-  * newObj.severeImpact.infectionsByRequestedTime;
+  newObj.impact.casesForICUByRequestedTime = Math.trunc(
+    (newObj.impact.infectionsByRequestedTime * 5) / 100
+  );
+  newObj.severeImpact.casesForICUByRequestedTime = Math.trunc(
+    0.05 * newObj.severeImpact.infectionsByRequestedTime
+  );
+  newObj.impact.casesForVentilatorsByRequestedTime = Math.trunc(
+    0.02 * newObj.impact.infectionsByRequestedTime
+  );
+  newObj.impact.casesForVentilatorsByRequestedTime = Math.trunc(
+    0.02 * newObj.severeImpact.infectionsByRequestedTime
+  );
   newObj.impact.dollarsInFlight = newObj.impact.infectionsByRequestedTime
   * data.region.avgDailyIncomeInUSD * data.region.avgDailyIncomePopulation
   * data.timeToElapse;
